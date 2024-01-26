@@ -14,49 +14,55 @@
 */
 
 /**
- * Comments should be present at the beginning of each procedure and class.
- * Great to have comments before crucial code sections within the procedure.
-*/
-
-/**
  * Define Global Variables
  * 
 */
+const navigationMenu = document.getElementById('navbar__list');
+const sections = document.querySelectorAll('section');
 
-
-/**
- * End Global Variables
- * Start Helper Functions
- * 
-*/
-
-
-
-/**
- * End Helper Functions
- * Begin Main Functions
- * 
-*/
 
 // build the nav
+for (const section of sections) {
+    const listItem = document.createElement('li');
+    const link = document.createElement('a');
+    link.classList.add('menu__link');
+    link.innerHTML = section.getAttribute('data-nav');
+    link.dataset.nav = section.id; 
+    listItem.appendChild(link);
+    navigationMenu.appendChild(listItem);
+  }
+ 
 
+  
 
 // Add class 'active' to section when near top of viewport
+window.onscroll=function makeActive(){
+    for ( sec of sections) {
+        const box = sec.getBoundingClientRect();
+        //Find a value that works best, but 150 seems to be a good start.
+        const VALUE = 150; 
+        if (box.top <= VALUE && box.bottom >= VALUE) {
+            sec.classList.add("active");
+        //apply active state on current section and corresponding Nav link
+        } else {
+        //Remove active state from other section and corresponding Nav link
+        sec.classList.remove("active");
+        }
+    }
+}
 
 
 // Scroll to anchor ID using scrollTO event
-
-
-/**
- * End Main Functions
- * Begin Events
- * 
-*/
-
-// Build menu 
-
-// Scroll to section on link click
-
-// Set sections as active
-
+navigationMenu.addEventListener("click",(menu) =>{
+    menu.preventDefault();
+   if (menu.target.dataset.nav){
+     document
+     .getElementById(`${menu.target.dataset.nav}`)
+     .scrollIntoView({behavior:"smooth"});
+     setTimeout(()=> {
+         location.hash= `${menu.target.dataset.nav}`;
+     }, 200);
+   }
+   });
+ 
 
