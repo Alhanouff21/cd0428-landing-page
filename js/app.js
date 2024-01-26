@@ -53,16 +53,17 @@ window.onscroll=function makeActive(){
 
 
 // Scroll to anchor ID using scrollTO event
-navigationMenu.addEventListener("click",(menu) =>{
-    menu.preventDefault();
-   if (menu.target.dataset.nav){
-     document
-     .getElementById(`${menu.target.dataset.nav}`)
-     .scrollIntoView({behavior:"smooth"});
-     setTimeout(()=> {
-         location.hash= `${menu.target.dataset.nav}`;
-     }, 200);
-   }
-   });
+document.addEventListener('click', (menu) => {
+    if (menu.target.matches('.menu__link')) {
+      menu.preventDefault();
+      const targetId = menu.target.dataset.nav;
+      if (targetId) {
+        document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => {
+          location.hash = targetId;
+        }, 200);
+      }
+    }
+  });
  
 
