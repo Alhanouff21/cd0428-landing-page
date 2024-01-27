@@ -71,7 +71,10 @@ section {
 
 .navbar__menu li {
     display: inline-block;
+
 }
+
+
 
 .navbar__menu .menu__link {
     display: block;
@@ -86,6 +89,12 @@ section {
     color: #fff;
     transition: ease 0.3s all;
 }
+
+.navbar__menu .active-link {
+    background-color: rgb(72, 91, 112);
+    transition: ease 0.3s all;
+  }
+  
 
 /* Header Styles */
 .page__header {
@@ -217,6 +226,7 @@ section.active .landing__container::after {
     opacity: 1;
     animation: rotate 5s linear 0s infinite forwards reverse;
 }
+
 
 /* Section Active Styles Keyframe Animations */
 @keyframes rotate {

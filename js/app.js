@@ -36,20 +36,22 @@ for (const section of sections) {
   
 
 // Add class 'active' to section when near top of viewport
-window.onscroll=function makeActive(){
-    for ( sec of sections) {
-        const box = sec.getBoundingClientRect();
-        //Find a value that works best, but 150 seems to be a good start.
-        const VALUE = 150; 
-        if (box.top <= VALUE && box.bottom >= VALUE) {
-            sec.classList.add("active");
-        //apply active state on current section and corresponding Nav link
-        } else {
-        //Remove active state from other section and corresponding Nav link
-        sec.classList.remove("active");
-        }
+window.onscroll = function() {
+	sections.forEach(function(active) {
+    let activeLink = navigationMenu.querySelector(`[data-nav=${active.id}]`);
+	if(active.getBoundingClientRect().top >= -400 && active.getBoundingClientRect().top <= 150){
+
+    active.classList.add("active");
+    activeLink.classList.add("active-link");
+
     }
+    else{
+         active.classList.remove("active");
+         activeLink.classList.remove("active-link");
+    }
+	});
 }
+
 
 
 // Scroll to anchor ID using scrollTO event
